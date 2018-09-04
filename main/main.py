@@ -2,9 +2,10 @@ import numpy as np
 import pandas as pd
 import mapplot as map
 
-censusFilePath = "dataset/census2018.csv"
+censusFilePath = "../dataset/census2018.csv"
 
 def main():
+    map.mapshow()
     dtypes={
     "CENSUS_YEAR": np.int64,
     "GEO_CODE (POR)":np.int64,
@@ -25,7 +26,6 @@ def main():
     census_iter=pd.read_csv(censusFilePath,dtype=dtypes,na_values=["...","x","F","..","E","r"],iterator=True,chunksize=1000)
     df=pd.concat([chunk[chunk['GEO_LEVEL'] < 3] for chunk in census_iter])
     print(df)
-    map.mapshow()
-
+    
 if __name__ == "__main__":
     main()
