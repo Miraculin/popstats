@@ -58,6 +58,6 @@ def load_section(fp, rowfile,geoname):
     }
     row_table = pd.read_csv(rowfile, dtype=rowdtype)
     line = row_table[row_table['Geo Name'] == geoname].iloc[0]["Line Number"]
-    census_iter=pd.read_csv(fp,dtype=dtypes,usecols=cols,na_values=["...","x","F","..","E","r"],iterator=True,chunksize=1000,skiprows=range(1,line))
+    census_iter=pd.read_csv(fp,dtype=dtypes,usecols=cols,na_values=["...","x","F","..","E","r"],iterator=True,chunksize=1000,skiprows=range(1,line-1))
     df = pd.concat([chunk[chunk['GEO_NAME'] == geoname] for chunk in census_iter])
     return df

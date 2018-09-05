@@ -2,14 +2,17 @@ import numpy as np
 import pandas as pd
 import mapplot as map
 import datautils as dutil
+import matplotlib.pyplot as plt
 
 censusFilePath = "../dataset/census2018.csv"
 censusRowsPath = "../dataset/census2018rows.csv"
 
 def main():
-    #map.mapshow()
     #df = dutil.loadall(censusFilePath)
     df = dutil.load_section(censusFilePath,censusRowsPath,"British Columbia")
+    plot = map.CanadaMapPlot(df)
+    plot.plot()
+    plt.show()
     print(df)
 
 if __name__ == "__main__":
