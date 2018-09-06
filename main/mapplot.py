@@ -4,7 +4,9 @@ import cartopy.crs as ccrs
 import cartopy.io.shapereader as shpreader
 import cartopy.feature as cfeature
 import shapely.geometry as sgeom
+import datautils as dutil
 
+profile = "DIM: Profile of Census Divisions/Census Subdivisions (2247)"
 class CanadaMapPlot:
     canadaNW=(85.138256,-125.251778)
     canadaSE=(32.822230, -55.231211)
@@ -13,7 +15,8 @@ class CanadaMapPlot:
     projection=ccrs.LambertConformal(central_longitude=can_central_longitude,
                                                 standard_parallels=parallels)
     provinces = None
-    def __init__(self):
+    def __init__(self,df):
+        self.df = df
         self.provinces=getprovinces("CA")
         self.ax = None
         self.press = None
@@ -23,6 +26,8 @@ class CanadaMapPlot:
         print('%s click: button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
             ('double' if event.dblclick else 'single', event.button,
             event.x, event.y, event.xdata, event.ydata))
+        #for row in self.df[self.df[profile] == "Population, 2016"]
+        print(self.df[self.df[profile] == "Population, 2016"]["Dim: Sex (3): Member ID: [1]: Total - Sex"])
 
     def plot(self):
         provincebounds = cfeature.NaturalEarthFeature(
@@ -60,7 +65,7 @@ def getprovinces(country):
             ret.append(province)
     return ret
 
-def mapshow():
-    map = CanadaMapPlot()
-    map.plot()
-    plt.show()
+# def mapshow():
+#     map = CanadaMapPlot()
+#     map.plot()
+#     plt.show()
