@@ -9,7 +9,7 @@ censusRowsPath = "../dataset/census2018rows.csv"
 
 def main():
     #df = dutil.loadall(censusFilePath)
-    df = dutil.load_section(censusFilePath,censusRowsPath,"British Columbia")
+    df = dutil.loadprovinces(censusFilePath,censusRowsPath)
     plot = map.CanadaMapPlot(df)
     plot.plot()
     plt.show()

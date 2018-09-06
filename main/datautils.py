@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import itertools as it
 
 def loadall(fp):
     dtypes={
@@ -59,5 +60,23 @@ def load_section(fp, rowfile,geoname):
     row_table = pd.read_csv(rowfile, dtype=rowdtype)
     line = row_table[row_table['Geo Name'] == geoname].iloc[0]["Line Number"]
     census_iter=pd.read_csv(fp,dtype=dtypes,usecols=cols,na_values=["...","x","F","..","E","r"],iterator=True,chunksize=1000,skiprows=range(1,line-1))
-    df = pd.concat([chunk[chunk['GEO_NAME'] == geoname] for chunk in census_iter])
+    df = pd.concat(validchunk(census_iter, geoname))
     return df
+
+def validchunk(chunks, geoname):
+    for chunk in chunks:
+        mask = chunk['GEO_NAME'] == geoname
+        if mask.all():
+            yield chunk
+        else:
+            yield chunk.loc[mask]
+            break
+
+def loadprovinces(fp, rowfile):
+    provinces = ["British Columbia", "Alberta", "Saskatchewan", "Manitoba",
+    "Ontario", "Quebec", "Nova Scotia","Prince Edward Island", "New Brunswick",
+    "Newfoundland and Labrador","Northwest Territories", "Yukon", "Nunavut"]
+    frames = []
+    for p in provinces:
+        frames.append(load_section(fp,rowfile, p))
+    return pd.concat(frames)

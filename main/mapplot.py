@@ -26,7 +26,8 @@ class CanadaMapPlot:
         print('%s click: button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
             ('double' if event.dblclick else 'single', event.button,
             event.x, event.y, event.xdata, event.ydata))
-        print(self.df[self.df[profile] == "Population, 2016"].iloc[0]["Dim: Sex (3): Member ID: [1]: Total - Sex"])
+        #for row in self.df[self.df[profile] == "Population, 2016"]
+        print(self.df[self.df[profile] == "Population, 2016"]["Dim: Sex (3): Member ID: [1]: Total - Sex"])
 
     def plot(self):
         provincebounds = cfeature.NaturalEarthFeature(
