@@ -23,6 +23,8 @@ class CanadaMapPlot:
         self.cid=None
 
     def onclick(self,event):
+        """On click, produce a pop up with population stats of the clicked
+        province"""
         print('%s click: button=%d, x=%d, y=%d, xdata=%f, ydata=%f' %
             ('double' if event.dblclick else 'single', event.button,
             event.x, event.y, event.xdata, event.ydata))
@@ -30,6 +32,7 @@ class CanadaMapPlot:
         print(self.df[self.df[profile] == "Population, 2016"]["Dim: Sex (3): Member ID: [1]: Total - Sex"])
 
     def plot(self):
+        """Create a GeoAxes instance focused on Canada""""
         provincebounds = cfeature.NaturalEarthFeature(
             category='cultural',
             name='admin_1_states_provinces_lines',
@@ -54,6 +57,7 @@ class CanadaMapPlot:
 
 
 def getprovinces(country):
+    """get province/state divisions of a country by iso_a2 code"""
     provfilename = shpreader.natural_earth(resolution='50m',
                                         category='cultural',
                                         name='admin_1_states_provinces')

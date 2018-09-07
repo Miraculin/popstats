@@ -3,9 +3,11 @@ import pandas as pd
 import mapplot as map
 import datautils as dutil
 import matplotlib.pyplot as plt
+import os.path
 
-censusFilePath = "../dataset/census2018.csv"
-censusRowsPath = "../dataset/census2018rows.csv"
+datapath = "../dataset/"
+censusFilePath = os.path.join(datapath, "census2018.csv")
+censusRowsPath = os.path.join(datapath,"rows.csv")
 
 def main():
     #df = dutil.loadall(censusFilePath)
