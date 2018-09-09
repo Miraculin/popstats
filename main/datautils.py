@@ -3,7 +3,7 @@ import numpy as np
 import itertools as it
 
 def loadall(fp):
-    """load the entire csv"""
+    """load the entire csv iteratively"""
     dtypes={
     "CENSUS_YEAR": np.int64,
     "GEO_CODE (POR)":np.int64,
@@ -31,7 +31,14 @@ def loadall(fp):
     return df
 
 def load_section(fp, rowfile,geoname):
-    """load a section of a csv file based on a geoname and row file"""
+    """
+    load a section into a dataframe from a csv file, row file and geoname
+
+    Keyword Arguments:
+    fp -- file path to CSV file
+    rowfile -- file path to row file corresponding to CSV file
+    geoname -- geoname of interest
+    """
     dtypes={
     "CENSUS_YEAR": np.int64,
     "GEO_CODE (POR)":np.int64,
@@ -76,7 +83,14 @@ def validchunk(chunks, geoname):
             break
 
 def loadprovinces(fp, rowfile):
-    """loads census data for all the provinces in Canada into a dataframe"""
+    """
+    loads census data for all the provinces in Canada into a dataframe
+
+    Keyword Arguments:
+    fp -- file path to CSV file
+    rowfile -- file path to rowfile
+    """
+
     provinces = ["British Columbia", "Alberta", "Saskatchewan", "Manitoba",
     "Ontario", "Quebec", "Nova Scotia","Prince Edward Island", "New Brunswick",
     "Newfoundland and Labrador","Northwest Territories", "Yukon", "Nunavut"]

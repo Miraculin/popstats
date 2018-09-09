@@ -8,6 +8,10 @@ import datautils as dutil
 
 profile = "DIM: Profile of Census Divisions/Census Subdivisions (2247)"
 class CanadaMapPlot:
+    """The main Canada Map Plot plotted using Statistics Canada's
+    recommend projection parameters
+    """
+
     canadaNW=(85.138256,-125.251778)
     canadaSE=(32.822230, -55.231211)
     parallels=(49,77)
@@ -16,6 +20,11 @@ class CanadaMapPlot:
                                                 standard_parallels=parallels)
     provinces = None
     def __init__(self,df):
+        """
+        Keyword arguments:
+        df -- the dataframe containing the Canada Census data
+        """
+
         self.df = df
         self.provinces=getprovinces("CA")
         self.ax = None
@@ -55,6 +64,27 @@ class CanadaMapPlot:
         self.fig = self.ax.get_figure()
         self.cid = self.fig.canvas.mpl_connect('button_press_event',self.onclick)
 
+class PopulationInfoBox:
+    """
+    An info box containing the population statistics of a selected
+    region.
+    """
+
+    def __init__(self,x,y,df):
+        """
+        Keyword arguments:
+        x -- x coordinate
+        y -- y coordinate
+        df -- dataframe containing data of the selected region
+        """
+
+        self.x = x
+        self.y = y
+        self.df = df
+
+    def draw():
+        """Draws the Info Box"""
+        pass
 
 def getprovinces(country):
     """get province/state divisions of a country by iso_a2 code"""
