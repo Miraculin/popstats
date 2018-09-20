@@ -7,7 +7,7 @@ import os.path
 
 datapath = "../dataset/"
 censusFilePath = os.path.join(datapath, "census2018.csv")
-censusRowsPath = os.path.join(datapath,"rows.csv")
+censusRowsPath = os.path.join(datapath,"census2018rows.csv")
 
 def main():
     #df = dutil.loadall(censusFilePath)

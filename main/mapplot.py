@@ -41,7 +41,7 @@ class CanadaMapPlot:
         print(self.df[self.df[profile] == "Population, 2016"]["Dim: Sex (3): Member ID: [1]: Total - Sex"])
 
     def plot(self):
-        """Create a GeoAxes instance focused on Canada""""
+        """Create a GeoAxes instance focused on Canada"""
         provincebounds = cfeature.NaturalEarthFeature(
             category='cultural',
             name='admin_1_states_provinces_lines',
